@@ -1,0 +1,73 @@
+{
+  "name": "PawMetrics v1.1 - Haftalik Stok ve Butce Takibi",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtDay": [0],
+              "triggerAtHour": 20
+            }
+          ]
+        }
+      },
+      "id": "trigger-1",
+      "name": "Haftalik Zamanlayici",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const urunler = [\n  { ad: 'Kisirlastirilmis Somonlu Mama (15kg)', stok: 4500, tuketim: 85, planlanan: 2200, gerceklesen: 2450 },\n  { ad: 'Bentonit Kedi Kumu (20L)', stok: 12000, tuketim: 400, planlanan: 750, gerceklesen: 680 },\n  { ad: 'Odul & Vitamin', stok: 600, tuketim: 30, planlanan: 400, gerceklesen: 420 }\n];\n\nreturn urunler.map(u => {\n  const kalanGun = Math.floor(u.stok / u.tuketim);\n  const butceFarki = u.gerceklesen - u.planlanan;\n  return {\n    json: {\n      urun: u.ad,\n      kalanGun,\n      butceFarki,\n      uyariGerekli: kalanGun <= 15 || butceFarki > 0\n    }\n  };\n});"
+      },
+      "id": "code-1",
+      "name": "Stok ve Butce Hesapla",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.uyariGerekli }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "if-1",
+      "name": "Kritik Stok veya Butce Asimi Var mi?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [680, 300]
+    },
+    {
+      "parameters": {
+        "sendTo": "merveyaren2727@gmail.com",
+        "subject": "=PawMetrics Uyarisi: {{ $json.urun }}",
+        "message": "=Urun: {{ $json.urun }}\nKalan Gun: {{ $json.kalanGun }} gun\nButce Sapmasi: {{ $json.butceFarki }} TL"
+      },
+      "id": "gmail-1",
+      "name": "Uyari Maili Gonder",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [920, 220]
+    }
+  ],
+  "connections": {
+    "Haftalik Zamanlayici": {
+      "main": [[{ "node": "Stok ve Butce Hesapla", "type": "main", "index": 0 }]]
+    },
+    "Stok ve Butce Hesapla": {
+      "main": [[{ "node": "Kritik Stok veya Butce Asimi Var mi?", "type": "main", "index": 0 }]]
+    },
+    "Kritik Stok veya Butce Asimi Var mi?": {
+      "main": [[{ "node": "Uyari Maili Gonder", "type": "main", "index": 0 }], []]
+    }
+  }
+}
