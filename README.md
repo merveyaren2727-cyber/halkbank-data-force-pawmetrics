@@ -49,6 +49,19 @@ Python kural motorunun her Pazar akşamı otomatik tetiklenmesi ve bütçe aşı
 ![n8n Otomasyon Akışı](n8n_akis_2.png)
 
 * 📄 **İş Akışı Kaynak Dosyası:** `pawmetrics_v1_n8n_workflow.json`
+
+---
+
+## 🧠 2. Hafta Geliştirmesi: PawMetrics v2.0 (AI Karar Destek & Prompt Mühendisliği)
+
+**17 & 19 Kasım (AI Okuryazarlığı I & II)** derslerinde işlenen üretken yapay zeka mimarisi, yapılandırılmış prompt tasarımı ve halüsinasyon kontrolü prensipleri projeye entegre edilmiştir:
+
+* **Rol-Bağlam-Görev-Kısıt Mimarisi (`System Instruction`):** Modelin dışarıdan uydurma marka veya fiyat üretmesini engelleyen katı sınırlandırma kuralları tanımlandı.
+* **Bağlam Enjeksiyonu (`Context Injection`):** 1. haftadaki İz Tablosundan (`Trace Table`) gelen doğrulanmış sayısal sapma verileri doğrudan AI karar motoruna girdi olarak bağlandı.
+
+![PawMetrics v2.0 AI Karar Çıktısı](pawmetrics_v2_ai_cikti.png)
+
+* 📓 **2. Hafta Notebook Dosyası:** `PawMetrics_v2_Hafta2.ipynb`
 * **Workflow (İş Akışı):** Birbirine bağlı adımlardan oluşan otomatik süreç şeması.
 * **Trigger (Tetikleyici):** Akışı başlatan ilk olay (örneğin belirli bir saatte çalışan *Schedule Trigger* veya yeni veri girişi).
 * **Node (Düğüm):** Akış içindeki her bir işlem kutucuğu (veri okuma, hesaplama, e-posta/bildirim gönderme).
