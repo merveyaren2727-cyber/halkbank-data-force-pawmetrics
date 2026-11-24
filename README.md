@@ -40,6 +40,15 @@ Evcil hayvan bakım giderlerini, mama/kum tüketim hızını ve aylık bütçe s
 | `0` | Somonlu Mama (15kg) | `52` | `False` | `+250` | `True` | Stok: Yeterli / Bütçe: Aşım |
 | `1` | Bentonit Kum (20L) | `30` | `False` | `-70` | `False` | Stok: Yeterli / Bütçe: İçi |
 | `2` | Ödül & Vitamin | `20` | `False` | `+20` | `True` | Stok: Yeterli / Bütçe: Aşım |
+---
+
+## ⚡ 1. Hafta Low-Code Otomasyonu (n8n)
+
+Python kural motorunun her Pazar akşamı otomatik tetiklenmesi ve bütçe aşımı/kritik stok durumunda uyarı göndermesi için kurgulanan ve çalıştırılan n8n iş akışı (`Schedule Trigger` $\rightarrow$ `Code` $\rightarrow$ `IF` $\rightarrow$ `Gmail`):
+
+![n8n Otomasyon Akışı](n8n_akis_2.png)
+
+* 📄 **İş Akışı Kaynak Dosyası:** `pawmetrics_v1_n8n_workflow.json`
 * **Workflow (İş Akışı):** Birbirine bağlı adımlardan oluşan otomatik süreç şeması.
 * **Trigger (Tetikleyici):** Akışı başlatan ilk olay (örneğin belirli bir saatte çalışan *Schedule Trigger* veya yeni veri girişi).
 * **Node (Düğüm):** Akış içindeki her bir işlem kutucuğu (veri okuma, hesaplama, e-posta/bildirim gönderme).
