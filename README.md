@@ -30,6 +30,16 @@ Evcil hayvan bakım giderlerini, mama/kum tüketim hızını ve aylık bütçe s
 * **`if / elif / else`:** Belirli bir koşul doğruysa (`True`) veya yanlışsa (`False`) farklı karar dallarını çalıştıran mekanizma.
 
 ### ⚡ Low-Code & n8n Mantığı
+
+## 🔍 1. Hafta Algoritma İz Tablosu (Trace Table)
+
+`for` döngüsünün her adımında (`i = 0, 1, 2`) değişkenlerin bellekte aldığı değerler ve `if/else` koşul kontrollerinin (`True / False`) adım adım takibi:
+
+| `i` | `urun` | `kalan_gun` | `kalan_gun <= 15` | `butce_farki` | `butce_farki > 0` | Çıktı (`print`) |
+| :---: | :--- | :---: | :---: | :---: | :---: | :--- |
+| `0` | Somonlu Mama (15kg) | `52` | `False` | `+250` | `True` | Stok: Yeterli / Bütçe: Aşım |
+| `1` | Bentonit Kum (20L) | `30` | `False` | `-70` | `False` | Stok: Yeterli / Bütçe: İçi |
+| `2` | Ödül & Vitamin | `20` | `False` | `+20` | `True` | Stok: Yeterli / Bütçe: Aşım |
 * **Workflow (İş Akışı):** Birbirine bağlı adımlardan oluşan otomatik süreç şeması.
 * **Trigger (Tetikleyici):** Akışı başlatan ilk olay (örneğin belirli bir saatte çalışan *Schedule Trigger* veya yeni veri girişi).
 * **Node (Düğüm):** Akış içindeki her bir işlem kutucuğu (veri okuma, hesaplama, e-posta/bildirim gönderme).
